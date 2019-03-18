@@ -1,0 +1,56 @@
+//bytedance 
+//目的：清除字符串中aabb,aaa型字符串
+// 出的问题： StringBuffer length()会改变！
+
+import java.util.Scanner;
+public class Main{
+    public static void main(String[] args){
+        Scanner input=new Scanner(System.in);
+        int n=input.nextInt();
+        input.nextLine();
+        String[] str=new String[n];
+        for(int i=0;i<n;i++){
+        	str[i]=input.nextLine();
+        }
+        
+        StringBuffer sb;
+        for(int i=0;i<n;i++){
+        	 sb=new StringBuffer(str[i]);
+        	 if(sb.length()<=2){  //长度小于2
+        		 System.out.println(str[i]);
+        		 continue;
+        	 }
+        	 boolean flag=false; //前两个相等标志
+        	 for(int j=1;j<sb.length();j++){
+        		 if(flag==true) //前两个==
+        		 {
+        			 int temp=j-1;  //避免前一个字符是，找当前字符的前一个不是‘，’的字符
+        			 while(temp>=0&&sb.charAt(temp)==','){
+        				 temp--;
+        			 }
+        			 //if(sb.charAt(j)==sb.charAt(j-1)){
+        			 if(sb.charAt(j)==sb.charAt(temp)){//AAA情况
+        				// sb.deleteCharAt(j);
+        				 sb.replace(j, j+1, ",");
+        			 }
+        			 else{//AAB情况
+        				 if(j+1<sb.length()&&sb.charAt(j)==sb.charAt(j+1)){//AABB情况
+        					// sb.deleteCharAt(j+1);
+        					 sb.replace(j, j+1, ",");
+        					 //flag=false;
+        				 }else{
+        					 flag=false;
+        				 }
+        			 }
+        		 }else{//前两个！=
+        			 if(sb.charAt(j)==sb.charAt(j-1))
+            			 flag=true;
+        			
+        		 }
+        		
+        	 }
+        	// System.out.println(sb.toString());
+        	 System.out.println(sb.toString().replace(",", ""));
+        }
+    }
+}
