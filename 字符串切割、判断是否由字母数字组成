@@ -1,0 +1,68 @@
+//huawei 第二题
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class Main{
+	//左移
+	public static String moveLeft(String s,int num){
+		String str=s,str1,str2;
+		for(int i=0;i<num;i++){
+			str1=str.substring(1);
+			str2=str.substring(0,1);
+			str=str1+str2;
+		}
+		return str;
+	}
+	//判断是否全是数字和字母
+	public static Boolean onlyLetterDigit(String str){
+		String reg="^[a-z0-9A-Z]+$";
+		return str.matches(reg);
+	}
+    public static void main(String[] args){
+    	ArrayList<String> list=new ArrayList<>();
+    	Scanner input=new Scanner(System.in);
+    	String s;
+    	while(input.hasNextLine()){
+    		s=input.nextLine();
+    		if(s==null||s.trim().length()==0)
+    			break;
+    		list.add(s);
+    	}
+    	ArrayList<String> Usefullist=new ArrayList<>();
+    	ArrayList<String> UnUsefullist=new ArrayList<>();
+
+    	for(int i=0;i<list.size();i++){
+    		if(onlyLetterDigit(list.get(i))){
+    			if(!Usefullist.contains(list.get(i)))
+    			   Usefullist.add(list.get(i));
+    		}
+    		else
+    			UnUsefullist.add(list.get(i));
+    	}
+    	//输出有效字符
+    	for(int i=0;i<Usefullist.size();i++)
+    		System.out.print(Usefullist.get(i)+" ");
+    	System.out.println();
+    	//输出无效字符
+    	for(int i=0;i<UnUsefullist.size();i++)
+    		System.out.print(UnUsefullist.get(i)+" ");
+    	System.out.println();
+    	//左移后的字符串
+    	ArrayList<String> leftlist=new ArrayList<>();
+    	//有效字符左移
+    	for(int i=0;i<Usefullist.size();i++){
+    		leftlist.add(moveLeft(Usefullist.get(i), 10));
+    		System.out.print(leftlist.get(i)+" ");
+    		
+    	}
+    	System.out.println();
+    	//左移后排序
+    	Collections.sort(leftlist);
+    	//第四个输出
+    	for(int i=0;i<leftlist.size();i++){
+    		System.out.print(leftlist.get(i)+" ");
+    		
+    	}
+    }
+} 
