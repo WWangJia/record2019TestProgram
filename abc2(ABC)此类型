@@ -1,0 +1,51 @@
+//4.10 华为 第二题
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Scanner;
+import java.util.Stack;
+
+public class Main{
+
+    public static void main(String[] args){
+           
+    	Scanner input=new Scanner(System.in); 
+    	String s=input.nextLine();
+    	Stack<String> mystack=new Stack<>();
+    	for(int i=0;i<s.length();i++){
+    	char a=s.charAt(i);
+    	if(a==')'||a==']'||a=='}')//出栈
+    	{
+    	String temp="";
+    	String b=mystack.pop();
+    	while(!b.equals("(")&&!b.equals("[")&&!b.equals("{")){
+    	temp=b+temp;
+    	b=mystack.pop();
+    	}
+    	//取数字
+    	b=mystack.pop();
+    	String temp1="";
+    	for(int j=0;j<Integer.parseInt(b);j++){
+    	temp1+=temp;
+    	}
+    	//加回去
+    	for(int j=0;j<temp1.length();j++){
+    	mystack.push(temp1.charAt(j)+"");
+    	}
+    	}
+    	else
+    	mystack.push(a+"");
+    	}
+    	
+    	 String b="";
+    	 while(!mystack.empty()){
+    	 b=b+mystack.pop();
+    	 }
+
+    	//转数组
+    	//char[] array=b.toCharArray();
+      //  Arrays.sort(array);
+      //  String Str=new String(array);  
+        System.out.println(b);
+    }
+} 
