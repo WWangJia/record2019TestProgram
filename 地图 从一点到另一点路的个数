@@ -1,0 +1,69 @@
+//4.10 hua wei 第三题    未提交！！！
+//条件：只能上下左右走，而且每次走都要比当前位置数大
+//输入
+//4 5   维数
+//0 1 0 0 0  //从[0][0]开始
+//0 2 3 0 0
+//0 0 4 5 0
+//0 0 7 6 0
+//0 1 3 2   金店，出点坐标
+import java.util.Scanner;
+
+
+public class Main{
+ private int num;
+
+  public static void main(String[] args){
+         
+  	Scanner input=new Scanner(System.in); 
+    Main mm=new Main();
+  	int n=input.nextInt();
+  	int m=input.nextInt();
+  	input.nextLine();
+  	int[][] a=new int[n][m];
+  	for(int i=0;i<n;i++){
+  		String s=input.nextLine();
+  		String[] temp=s.trim().split(" ");
+  		for(int j=0;j<temp.length;j++){
+  			a[i][j]=Integer.parseInt(temp[j]);
+  		}
+  	}
+  	int ax=input.nextInt();
+  	int ay=input.nextInt();
+  	int bx=input.nextInt();
+  	int by=input.nextInt();
+  	mm.aa(a,ax,ay,bx,by,n,m,mm);
+  	System.out.println(mm.num);	
+  }
+  public void aa(int[][] a,int inx,int iny,int outx,int outy,int n,int m,Main main){
+	  if(inx==outx&&iny==outy)
+	  {
+		 main.num++;
+		 main.num=main.num%1000000000;
+		 return;
+	  }
+	  //上面的
+	  int topx=inx-1;
+	  if(!(topx==n||topx<0||iny<0||iny==m))
+		  if(a[topx][iny]>a[inx][iny])
+		     aa(a,topx,iny,outx,outy,n,m,main);
+	  //右面的
+	  int righty=iny+1;
+	  if(!(inx==n||inx<0||righty<0||righty==m))
+			  if(a[inx][righty]>a[inx][iny])
+				     aa(a,inx,righty,outx,outy,n,m,main);
+	  //下面的
+	  int bottomx=inx+1;
+	  if(!(bottomx==n||bottomx<0||iny<0||iny==m))
+		  if(a[bottomx][iny]>a[inx][iny])
+		     aa(a,bottomx,iny,outx,outy,n,m,main);
+	  //左面的
+	  int lefty=inx-1;
+	  if(!(inx==n||inx<0||lefty<0||lefty==m))
+			  if(a[inx][lefty]>a[inx][iny])
+				     aa(a,inx,lefty,outx,outy,n,m,main);
+	  return;
+	  
+  }
+} 
+
