@@ -1,0 +1,30 @@
+//4.10 hua wei 第一题
+//并排序
+public class Main{
+
+    public static void main(String[] args){
+     ArrayList<String> list=new ArrayList<>();
+    	 Scanner sc=new Scanner(System.in); 
+    	 StringBuffer sb=new StringBuffer();      
+    	 while(sc.hasNextLine()){           
+    	 String s=sc.nextLine();           
+    	if(s==null||s.trim().length()==0)
+    	  break;
+    	 sb.append(s);      
+    	 if(s.length()%8!=0){                
+    	 int n=8-s.length()%8;               
+    	 for(int i=0;i<n;i++){                    
+    	 sb.append("0");                
+    	 }            
+    	}            
+    	 while(sb.length()>=8){                
+    	list.add(sb.substring(0, 8));                
+    	sb=sb.delete(0, 8);     
+    	}        
+    	}
+    	 Collections.sort(list);    //Arrays.sort(array)
+    	// System.out.println(list.size());
+    	 for(int i=0;i<list.size();i++)
+    	 System.out.println(list.get(i));
+    }
+} 
